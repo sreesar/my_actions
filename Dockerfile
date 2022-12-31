@@ -47,12 +47,12 @@ RUN npm install -g typescript
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 ENV SCULLY_PUPPETEER_EXECUTABLE_PATH '/usr/bin/chromium-browser'
 # building the application
-COPY aitrios-sdk-typescript-dev/ .
-WORKDIR ./ts
+#COPY aitrios-sdk-typescript-dev/ .
+#WORKDIR ./ts
 
 # Install dependencies
-RUN cd ./tslib && npm install && npm run docs && tsc -b && npm pack 
-RUN cd ./tests && npm test
+#RUN cd ./tslib && npm install && npm run docs && tsc -b && npm pack 
+#RUN cd ./tests && npm test
 #RUN   cd ./tests && npm test
 
 # to create artifact
