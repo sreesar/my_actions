@@ -37,9 +37,6 @@ RUN apt-get install python3.8-venv -y  && apt-get clean
 #Node and NPM configuration
 RUN cd /usr/local/ && wget https://nodejs.org/dist/v16.13.0/node-v16.13.0-linux-x64.tar.xz && tar -xf  node-v16.13.0-linux-x64.tar.xz
 ENV PATH /usr/local/node-v16.13.0-linux-x64/bin:$PATH
-# Set up the application directory
-VOLUME ["/home"]
-WORKDIR /home
 
 # Install node packages
 RUN npm install -g typescript
@@ -49,7 +46,7 @@ ENV SCULLY_PUPPETEER_EXECUTABLE_PATH '/usr/bin/chromium-browser'
 
 
 # versions
-RUN ls -al /home/
+
 RUN node --version
 RUN npm --version
 RUN tsc --version
@@ -60,9 +57,8 @@ CMD ["npm", "-v"]
 #ENTRYPOINT ["tail"]
 #ENTRYPOINT ["-f", "/dev/null"]
 # Copies your code file from your action repository to the filesystem path `/` of the container
-COPY entrypoint.sh /home/entrypoint.sh
-RUN chmod 777 /home/entrypoint.sh
+COPY entrypoint.sh .
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
 
-ENTRYPOINT ["/home/entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
 
