@@ -6,7 +6,7 @@ RUN DEBIAN_FORNTEND=noninteractive apt update -y && apt install -y \
                                                                  curl \
                                                               openssl \
                                                                  # for node-sass module
-                                                               make  gcc g++ musl chromium-browser   ca-certificates
+                                                               make  gcc g++ musl ca-certificates
 
 # set urls as trusted-host
 ENV PYTHON_TRUST="--trusted-host pypi.org --trusted-host files.pythonhosted.org"
@@ -44,18 +44,6 @@ RUN npm install -g typescript
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 ENV SCULLY_PUPPETEER_EXECUTABLE_PATH '/usr/bin/chromium-browser'
 
-
-# versions
-
-RUN node --version
-RUN npm --version
-RUN tsc --version
-RUN python --version
-
-
-CMD ["npm", "-v"]
-#ENTRYPOINT ["tail"]
-#ENTRYPOINT ["-f", "/dev/null"]
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 777 /entrypoint.sh
